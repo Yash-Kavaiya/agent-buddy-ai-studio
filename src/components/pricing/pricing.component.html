@@ -1,0 +1,39 @@
+
+<section class="bg-secondary py-20">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-white">Flexible Pricing for Teams of All Sizes</h2>
+      <p class="text-highlight mt-4 max-w-2xl mx-auto">Choose a plan that scales with your needs. Start for free and upgrade as you grow.</p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      @for (plan of plans; track plan.name) {
+        <div class="bg-primary rounded-lg shadow-xl p-8 flex flex-col relative" [class.border-2]="plan.isPopular" [class.border-brand]="plan.isPopular">
+          @if (plan.isPopular) {
+            <div class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2">
+              <span class="bg-brand text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Most Popular</span>
+            </div>
+          }
+          <h3 class="text-2xl font-bold text-white text-center mb-2">{{ plan.name }}</h3>
+          <p class="text-highlight text-center mb-6">{{ plan.description }}</p>
+          <div class="text-center mb-6">
+            <span class="text-5xl font-extrabold text-white">{{ plan.price }}</span>
+            @if (plan.period) {
+              <span class="text-highlight">{{ plan.period }}</span>
+            }
+          </div>
+          <ul class="space-y-4 text-light mb-8 flex-grow">
+            @for (feature of plan.features; track feature) {
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                <span>{{ feature }}</span>
+              </li>
+            }
+          </ul>
+          <a href="#" class="w-full text-center font-bold py-3 px-6 rounded-lg transition-all duration-300" [class.bg-brand]="plan.isPopular" [class.text-white]="plan.isPopular" [class.hover:bg-sky-400]="plan.isPopular" [class.bg-accent]="!plan.isPopular" [class.text-white]="!plan.isPopular" [class.hover:bg-highlight]="!plan.isPopular">
+            Choose Plan
+          </a>
+        </div>
+      }
+    </div>
+  </div>
+</section>
